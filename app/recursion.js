@@ -37,13 +37,84 @@ exports.recursionAnswers = {
 
   permute: function(arr) {
 
+    var results = [],
+        temp    = [];
+
+    function permute(a){
+      var current;
+      for(var i=0; i < a.length; i++){
+        current = a.splice(i,1)[0];
+        temp.push(current);
+        if(temp.length == 4){
+          results.push(temp.slice());
+        }else{
+          permute(a);
+        }
+        a.splice(i,0,current);
+        temp.pop();
+      }
+      return results;
+    }
+    return permute(arr);
   },
 
   fibonacci: function(n) {
-
+    function fib(n){
+      if(n<=2){
+          return 1; 
+        } 
+        else{
+          return fib(n-2) + fib(n-1);
+        } 
+    }
+    return fib(n);
   },
 
   validParentheses: function(n) {
+    var baseArr = [];
+    for(var i=0; i<n; i++){
+      baseArr.unshift('(');
+      baseArr.push(')');
+    }
+    var resultArr = []; 
+    var tempArr = [];
+
+    return paren(baseArr);
+
+    function paren(arr){
+      var current;
+      for(var i=0; i<arr.length; i++){
+        current = arr.splice(i,1)[0];
+        tempArr.push(current);
+        if(arr.length){
+          paren(arr);
+        }else{
+          if(tempArr[0] != ")" && 
+                tempArr[tempArr.length-1] != "(" && 
+                    resultArr.indexOf(tempArr.slice().join('')) == -1 &&
+                        sanitise(tempArr.slice().join(''))){
+            resultArr.push(tempArr.slice().join(''));
+          }
+        }
+        arr.splice(i,0,current);
+        tempArr.pop();
+      }
+      return resultArr;
+    }
+
+    function sanitise(arr){
+      var opens = 0;
+      var closes = 0;
+      for (var i=0; i<arr.length; i++){
+        if(arr[i]=="("){
+          opens++; 
+        } else {
+          closes++;
+        }
+        if(closes>opens) return false;
+      }
+      return true;
+    }
 
   }
 };
