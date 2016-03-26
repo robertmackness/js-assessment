@@ -1,5 +1,4 @@
-# https://github.com/rmurphey - Rebecca Murphey's Test-Driven Javascript Assessment
-
-## Fully cmopleted answers to all questions contained within __dirname/app
-
-### See https://github.com/rmurphey/js-assessment for further details on how to get up and running
+# Rebecca Murphey's Test-Driven Javascript Ability Assessment
+https://github.com/rmurphey/js-assessment
+### Fully completed answers to all questions contained within __dirname/app
+### run 'npm start' and browse to localhost:4444 to see all tests passing
